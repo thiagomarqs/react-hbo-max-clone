@@ -1,33 +1,35 @@
 import { useCurrentScreenWidth } from "hooks/useCurrentScreenWidth";
+import { Content } from "models/Content";
 import { useEffect, useState } from "react";
-import { ContentMainInfo, ContentMainInfoProps } from "./ContentMainInfo"
+import { ContentMainInfo } from "./ContentMainInfo";
 
-export interface ContentDetailsProps extends ContentMainInfoProps {
-  backdropUrl: string;
-  posterUrl: string;
-  description: string;
+export interface ContentDetailsProps {
+  content: Content;
 }
 
 export const ContentDetails = (props: ContentDetailsProps) => {
-  const {
-    backdropUrl,
-    posterUrl,
-    certification,
-    description,
-    releaseDate,
-    runtimeInMinutes,
-    logo: logoUrl
-  } = props;
+
+  const { content } = props;
+
+  const { 
+    poster_url,
+    backdrop_url,
+    runtime,
+    release_date,
+    overview,
+    original_title,
+    certification
+  } = content;
 
   const screenWidth = useCurrentScreenWidth();
 
-  const [ backgroundImageUrl, setBackgroundImageUrl ] = useState(posterUrl);
+  const [ backgroundImageUrl, setBackgroundImageUrl ] = useState(poster_url);
 
   useEffect(() => { 
     const isSmallScreen = screenWidth < 640;
-    const bgImgUrl = isSmallScreen ? posterUrl : backdropUrl;
+    const bgImgUrl = isSmallScreen ? poster_url : backdrop_url;
     setBackgroundImageUrl(bgImgUrl);
-  }, [screenWidth]);
+  }, [screenWidth, poster_url, backdrop_url]);
 
   return (
     <div className="relative mb-6">
@@ -41,13 +43,13 @@ export const ContentDetails = (props: ContentDetailsProps) => {
       <div className="relative h-max pl-7 w-11/12 pt-[67vh] sm:pt-[40vh] lg:pt-[70vh]">
 
         <ContentMainInfo
-          logo={logoUrl}
-          runtimeInMinutes={runtimeInMinutes}
+          logo={{title: original_title}}
+          runtimeInMinutes={runtime}
           certification={certification}
-          releaseDate={releaseDate} />
+          releaseDate={new Date(release_date)} />
 
         <div className="mt-3">
-          <p>{description}</p>
+          <p>{overview}</p>
         </div>
       </div>
 

@@ -3,100 +3,71 @@ import { Loading } from "components/Loading/Loading"
 import { SectionGroup } from "components/SectionGroup/SectionGroup"
 import { TileProps } from "components/TileList/Tile"
 import { TileList } from "components/TileList/TileList"
-import { Movie } from "models/api/movie/Movie"
+import { useDocumentTitle } from "hooks/useDocumentTitle"
 import { SectionDefinition } from "models/components/SectionDefinition"
-import { useQuery } from "react-query"
+import { Content } from "models/Content"
+import { useEffect } from "react"
+import { useQuery, useQueryClient } from "react-query"
+import { useParams } from "react-router-dom"
 import { getMovie } from "services/movies"
 
 
-// TODO: Load all content from API with the movie id -> React Router + React Query + Axios.
-// TODO: Movie certification
-// TODO: Movie technical info
-// TODO: Related content (Get based on movie category)
-
-const sections: SectionDefinition[] = [
-  {
-    header: 'Cast & Crew',
-    rows: [
-      { label: 'Lefty', value: 'Al Pacino' },
-      { label: 'Lefty', value: 'Al Pacino' },
-      { label: 'Lefty', value: 'Al Pacino' },
-      { label: 'Lefty', value: 'Al Pacino' },
-      { label: 'Lefty', value: 'Al Pacino' },
-      { label: 'Lefty', value: 'Al Pacino' },
-    ],
-    expandByDefault: true
-  },
-  {
-    header: 'Cast & Crew',
-    rows: [
-      { label: 'Lefty', value: 'Al Pacino' }
-    ]
-  },
-  {
-    header: 'Cast & Crew',
-    rows: [
-      { label: 'Lefty', value: 'Al Pacino' }
-    ]
-  },
-  {
-    header: 'Cast & Crew',
-    rows: [
-      { label: 'Lefty', value: 'Al Pacino' }
-    ]
-  },
-]
-
-const movies: TileProps[] = [
-  {
-    imageUrl: 'https://art-gallery-latam.api.hbo.com/images/GYQFtyQxJ5MLCwwEAAABY/tileburnedin?v=e854aecfc5e709fa4b0893b993a1a097&size=320x480&compression=medium&protection=false&scaleDownToFit=false&productCode=hboMax&overlayImage=urn:warnermedia:brand:warnerbros&language=en-us',
-    size: 'default',
-  },
-  {
-    imageUrl: 'https://image.tmdb.org/t/p/w500//pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg',
-    size: 'default',
-    caption: { secondary: 'HBO' }
-  },
-  { imageUrl: 'https://art-gallery-latam.api.hbo.com/images/GYQFtyQxJ5MLCwwEAAABY/tileburnedin?v=e854aecfc5e709fa4b0893b993a1a097&size=320x480&compression=medium&protection=false&scaleDownToFit=false&productCode=hboMax&overlayImage=urn:warnermedia:brand:warnerbros&language=en-us', size: 'default' },
-  { imageUrl: 'https://art-gallery-latam.api.hbo.com/images/GYQFtyQxJ5MLCwwEAAABY/tileburnedin?v=e854aecfc5e709fa4b0893b993a1a097&size=320x480&compression=medium&protection=false&scaleDownToFit=false&productCode=hboMax&overlayImage=urn:warnermedia:brand:warnerbros&language=en-us', size: 'default' },
-  { imageUrl: 'https://art-gallery-latam.api.hbo.com/images/GYQFtyQxJ5MLCwwEAAABY/tileburnedin?v=e854aecfc5e709fa4b0893b993a1a097&size=320x480&compression=medium&protection=false&scaleDownToFit=false&productCode=hboMax&overlayImage=urn:warnermedia:brand:warnerbros&language=en-us', size: 'default' },
-  { imageUrl: 'https://art-gallery-latam.api.hbo.com/images/GYQFtyQxJ5MLCwwEAAABY/tileburnedin?v=e854aecfc5e709fa4b0893b993a1a097&size=320x480&compression=medium&protection=false&scaleDownToFit=false&productCode=hboMax&overlayImage=urn:warnermedia:brand:warnerbros&language=en-us', size: 'default' },
-  { imageUrl: 'https://art-gallery-latam.api.hbo.com/images/GYQFtyQxJ5MLCwwEAAABY/tileburnedin?v=e854aecfc5e709fa4b0893b993a1a097&size=320x480&compression=medium&protection=false&scaleDownToFit=false&productCode=hboMax&overlayImage=urn:warnermedia:brand:warnerbros&language=en-us', size: 'default' },
-  { imageUrl: 'https://art-gallery-latam.api.hbo.com/images/GYQFtyQxJ5MLCwwEAAABY/tileburnedin?v=e854aecfc5e709fa4b0893b993a1a097&size=320x480&compression=medium&protection=false&scaleDownToFit=false&productCode=hboMax&overlayImage=urn:warnermedia:brand:warnerbros&language=en-us', size: 'default' },
-  { imageUrl: 'https://art-gallery-latam.api.hbo.com/images/GYQFtyQxJ5MLCwwEAAABY/tileburnedin?v=e854aecfc5e709fa4b0893b993a1a097&size=320x480&compression=medium&protection=false&scaleDownToFit=false&productCode=hboMax&overlayImage=urn:warnermedia:brand:warnerbros&language=en-us', size: 'default' },
-  { imageUrl: 'https://art-gallery-latam.api.hbo.com/images/GYQFtyQxJ5MLCwwEAAABY/tileburnedin?v=e854aecfc5e709fa4b0893b993a1a097&size=320x480&compression=medium&protection=false&scaleDownToFit=false&productCode=hboMax&overlayImage=urn:warnermedia:brand:warnerbros&language=en-us', size: 'default' },
-  { imageUrl: 'https://art-gallery-latam.api.hbo.com/images/GYQFtyQxJ5MLCwwEAAABY/tileburnedin?v=e854aecfc5e709fa4b0893b993a1a097&size=320x480&compression=medium&protection=false&scaleDownToFit=false&productCode=hboMax&overlayImage=urn:warnermedia:brand:warnerbros&language=en-us', size: 'default' },
-  { imageUrl: 'https://art-gallery-latam.api.hbo.com/images/GYQFtyQxJ5MLCwwEAAABY/tileburnedin?v=e854aecfc5e709fa4b0893b993a1a097&size=320x480&compression=medium&protection=false&scaleDownToFit=false&productCode=hboMax&overlayImage=urn:warnermedia:brand:warnerbros&language=en-us', size: 'default' },
-  { imageUrl: 'https://art-gallery-latam.api.hbo.com/images/GYQFtyQxJ5MLCwwEAAABY/tileburnedin?v=e854aecfc5e709fa4b0893b993a1a097&size=320x480&compression=medium&protection=false&scaleDownToFit=false&productCode=hboMax&overlayImage=urn:warnermedia:brand:warnerbros&language=en-us', size: 'default' },
-  { imageUrl: 'https://art-gallery-latam.api.hbo.com/images/GYQFtyQxJ5MLCwwEAAABY/tileburnedin?v=e854aecfc5e709fa4b0893b993a1a097&size=320x480&compression=medium&protection=false&scaleDownToFit=false&productCode=hboMax&overlayImage=urn:warnermedia:brand:warnerbros&language=en-us', size: 'default' },
-]
+// TODO: Dinamically load movie from route
 
 export const ContentDetailsPage = () => {
 
-  const { isLoading, isError, data, error } = useQuery('getMovie', () => getMovie(550));
+  const { id } = useParams();
+  const { isLoading, isError, data, error } = useQuery(['getMovie', id], () => getMovie(Number(id)));
+  const [ title, setTitle ] = useDocumentTitle();
 
   if(isLoading) return <Loading/>
 
-  const { overview, runtime, release_date, backdrop_url, poster_url, original_title } = data as Movie;
+  setTitle(`${data?.original_title} • HBO Max`);
+
+  const { recommendations } = data as Content;
+
+  const list: TileProps[] = recommendations.map(r => { 
+    return {
+      imageUrl: r.posterUrl,
+      size: 'default',
+      contentUrl: r.contentUrl
+    }}
+  )
 
   return (
     <div className="w-screen text-text-secondary">
-
-      <ContentDetails
-        backdropUrl={backdrop_url}
-        posterUrl={poster_url}
-        logo={{
-          title: original_title
-        }}
-        description={overview}
-        runtimeInMinutes={runtime}
-        certification={'16'}
-        releaseDate={new Date(release_date)} />
-
-      <TileList title="More Like This" list={movies} />
-
-      <SectionGroup sections={sections} />
-
+      <ContentDetails content={data as Content}/>
+      <TileList title="More Like This" list={list} />
+      <SectionGroup sections={generateSectionsFromContent(data as Content)} />
     </div>
   )
+}
+
+const generateSectionsFromContent = (content: Content) => {
+  const { castCrew, producers, directors } = content;
+  
+  const castCrewSection = generateSection("Cast and Crew", castCrew, true);
+  const producersSection = generateSection("Producers", producers);
+  const directorsSection = generateSection("Directors", directors);
+
+  return [castCrewSection, producersSection, directorsSection];
+}
+
+const generateSection = (header: string, rows: Record<string, any>[], expandByDefault?: boolean): SectionDefinition => {
+  const section: SectionDefinition = {
+    header: header,
+    rows: rows.map(r => {
+      const keys = Object.keys(r);
+      const label = r[keys[0]] as unknown as string;
+      const value = r[keys[1]] as unknown as string;
+
+      return {
+        label: label,
+        value: value
+      }
+    }),
+    expandByDefault: expandByDefault
+  };
+
+  return section;
 }

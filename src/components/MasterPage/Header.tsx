@@ -5,7 +5,7 @@ import { useWindowScroll } from 'hooks/useWindowScroll';
 export interface NavbarProps {}
 
 // TODO: Hamburger menu
-export const Navbar = (props: NavbarProps) => {
+export const Header = (props: NavbarProps) => {
   
   const { scrollY } = useWindowScroll();
 
@@ -16,7 +16,7 @@ export const Navbar = (props: NavbarProps) => {
           <MenuIcon/>
         </div>
         <div className="w-24 h-fit my-auto mx-0">
-          <img src="src/assets/images/hbomaxlogo.png" alt="HBO Max logo" />
+          <img src="/src/assets/images/hbomaxlogo.png" alt="HBO Max logo" />
         </div>
         <div className='h-fit'>
           <SearchIcon/>

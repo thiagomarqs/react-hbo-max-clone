@@ -1,8 +1,3 @@
-import { Genre } from "./Genre";
-import { ProductionCompany } from "./ProductionCompany";
-import { ProductionCountry } from "./ProductionCountry";
-import { SpokenLanguage } from "./SpokenLanguage";
-
 export interface MovieResponse {
   adult: boolean;
   backdrop_path: string;
@@ -29,4 +24,27 @@ export interface MovieResponse {
   video: boolean;
   vote_average: number;
   vote_count: number;
+}
+
+export interface Genre {
+  id: number;
+  name: string;
+}
+
+export interface ProductionCountry {
+  iso_3166_1: string;
+  name: string;
+}
+
+export interface ProductionCompany {
+  id: number;
+  logo_path?: any;
+  name: string;
+  origin_country: string;
+}
+
+export interface SpokenLanguage {
+  english_name: string;
+  iso_639_1: string;
+  name: string;
 }

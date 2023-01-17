@@ -2,9 +2,10 @@ import { Link } from "models/components/Link";
 import { SocialMediaLink } from "models/components/SocialMediaLink"
 import { PropsWithChildren } from "react"
 import { Footer } from "./Footer"
-import { Navbar } from "./Navbar"
+import { Header } from "./Header"
 import { ReactComponent as LinkedInLogo } from "assets/icons/social/linkedin.svg";
 import { ReactComponent as GitHubLogo } from "assets/icons/social/github.svg";
+import { Outlet } from "react-router-dom";
 
 const socialMediaLinks: SocialMediaLink[] = [
   {image: <LinkedInLogo/>, url: "https://linkedin.com/in/thiagosmarques"},
@@ -24,9 +25,12 @@ export const MasterPage = (props: PropsWithChildren) => {
 
   return (
     <div className="w-screen bg-black h-full">
-      <Navbar/>
-      {props.children}
-      <Footer socialMedia={socialMediaLinks} copyright={copyright} links={links}/>
+      <Header/>
+      <Outlet/>
+      <Footer 
+        socialMedia={socialMediaLinks} 
+        copyright={copyright} 
+        links={links}/>
     </div>
   )
 }
