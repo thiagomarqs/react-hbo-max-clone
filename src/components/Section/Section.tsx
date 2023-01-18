@@ -17,12 +17,12 @@ export const Section = (props: SectionProps) => {
   const toggleExpand = () => setExpanded(current => !current);
 
   return (
-    <div className="mb-6 mr-3 overflow-hidden">
-      <div className="flex justify-between">
+    <div className="mb-6 mr-3 overflow-hidden md:w-1/2">
+      <div className="flex justify-between md:grid md:grid-cols-2">
         <h2 className="text-white font-bold text-lg mb-2">{header}</h2>
-        <Arrow onClick={toggleExpand} className={!isExpanded ? "rotate-180" : ""}/>
+        <Arrow onClick={toggleExpand} className={`md:hidden ${!isExpanded ? "rotate-180" : ""}`}/>
       </div>
-      <div className={isExpanded ? 'h-full' : 'h-0'}>
+      <div className={`md:h-full ${isExpanded ? 'h-full' : 'h-0'}`}>
         {rows.map(row => <SectionRow key={uuid()} label={row.label} value={row.value}/>)}
       </div>
     </div>

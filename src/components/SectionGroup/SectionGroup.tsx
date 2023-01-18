@@ -9,7 +9,7 @@ export interface SectionGroupProps {
 export const SectionGroup = (props: SectionGroupProps) => {
   const { sections } = props;
   return (
-    <div className="ml-7 mb-5">
+    <div className="ml-7 mb-5 md:ml-14">
       {sections.map(section => <Section key={uuid()} header={section.header} rows={section.rows} expandByDefault={section.expandByDefault}/>)}
     </div>
   )

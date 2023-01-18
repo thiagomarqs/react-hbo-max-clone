@@ -18,6 +18,9 @@ module.exports = {
       },
       backgroundPosition: {
         'backdrop': '50% 55%'
+      },
+      transitionProperty: {
+        'position-x-axis': 'right, left',
       }
     },
   },

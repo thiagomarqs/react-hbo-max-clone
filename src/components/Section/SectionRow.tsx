@@ -8,8 +8,8 @@ export const SectionRow = (props: SectionRowProps) => {
 
   return (
     <div className="grid grid-cols-2 justify-between w-full pr-5 mb-1">
-      <p className="text-sm font-light">{label}</p>
-      <p className="text-sm font-light ml-2">{value}</p>
+      <p className="text-sm font-light md:text-base">{label}</p>
+      <p className="text-sm font-light ml-2 md:text-base">{value}</p>
     </div>
   )
 }

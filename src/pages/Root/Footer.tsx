@@ -12,7 +12,7 @@ export const Footer = (props: FooterProps) => {
   const { socialMedia, copyright, links } = props;
 
   return (
-    <div className="pl-7 pt-40 flex flex-col text-text-secondary text-xs">
+    <div className="pl-7 pt-40 flex flex-col w-screen text-text-secondary text-xs md:pl-14">
       <div className="flex mb-4">
         {socialMedia.map(media => <a key={uuid()} className="mr-6" href={media.url}>{media.image}</a>)}
       </div>

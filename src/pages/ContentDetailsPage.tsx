@@ -6,6 +6,7 @@ import { TileList } from "components/TileList/TileList"
 import { useDocumentTitle } from "hooks/useDocumentTitle"
 import { SectionDefinition } from "models/components/SectionDefinition"
 import { Content } from "models/Content"
+import { useEffect } from "react"
 import { useQuery } from "react-query"
 import { useParams } from "react-router-dom"
 import { getMovie } from "services/movies"
@@ -16,6 +17,10 @@ export const ContentDetailsPage = () => {
   const { id } = useParams();
   const { isLoading, isError, data, error } = useQuery(['getMovie', id], async () => getMovie(Number(id)), {staleTime: 1000 * 60 * 5});
   const [ title, setTitle ] = useDocumentTitle();
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  });
 
   if(isLoading) return <Loading/>
 
@@ -32,7 +37,7 @@ export const ContentDetailsPage = () => {
   )
 
   return (
-    <div className="w-screen text-text-secondary">
+    <div className="text-text-secondary">
       <ContentDetails content={data as Content}/>
       <TileList title="More Like This" list={list} />
       <SectionGroup sections={generateSectionsFromContent(data as Content)} />

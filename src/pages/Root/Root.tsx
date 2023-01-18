@@ -1,11 +1,11 @@
-import { Link } from "models/components/Link";
-import { SocialMediaLink } from "models/components/SocialMediaLink"
-import { PropsWithChildren } from "react"
-import { Footer } from "./Footer"
-import { Header } from "./Header"
-import { ReactComponent as LinkedInLogo } from "assets/icons/social/linkedin.svg";
 import { ReactComponent as GitHubLogo } from "assets/icons/social/github.svg";
+import { ReactComponent as LinkedInLogo } from "assets/icons/social/linkedin.svg";
+import { Link } from "models/components/Link";
+import { SocialMediaLink } from "models/components/SocialMediaLink";
+import { PropsWithChildren } from "react";
 import { Outlet } from "react-router-dom";
+import { Footer } from "./Footer";
+import { Header } from "./Header";
 
 const socialMediaLinks: SocialMediaLink[] = [
   {image: <LinkedInLogo/>, url: "https://linkedin.com/in/thiagosmarques"},
@@ -24,7 +24,7 @@ const links: Link[] = [
 export const Root = (props: PropsWithChildren) => {
 
   return (
-    <div className="w-screen bg-black h-full">
+    <div className="bg-black overflow-x-hidden">
       <Header/>
       <Outlet/>
       <Footer 

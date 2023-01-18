@@ -40,7 +40,7 @@ export const ContentDetails = (props: ContentDetailsProps) => {
       <div className="absolute -z-1 top-0 w-full h-full bg-backdrop-gradient-to-l"></div>
       <div className="absolute -z-1 top-0 w-full h-full bg-backdrop-gradient-to-b"></div>
 
-      <div className="relative h-max pl-7 w-11/12 pt-[67vh] sm:pt-[40vh] lg:pt-[70vh]">
+      <div className="relative h-max pl-7 w-11/12 pt-[67vh] sm:pt-[40vh] lg:pt-[70vh] md:pl-14">
 
         <ContentMainInfo
           logo={{title: original_title}}
@@ -48,7 +48,7 @@ export const ContentDetails = (props: ContentDetailsProps) => {
           certification={certification}
           releaseDate={new Date(release_date)} />
 
-        <div className="mt-3">
+        <div className="mt-3 md:w-1/2 md:text-lg">
           <p>{overview}</p>
         </div>
       </div>
