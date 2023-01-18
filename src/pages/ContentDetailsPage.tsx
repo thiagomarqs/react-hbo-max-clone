@@ -6,18 +6,15 @@ import { TileList } from "components/TileList/TileList"
 import { useDocumentTitle } from "hooks/useDocumentTitle"
 import { SectionDefinition } from "models/components/SectionDefinition"
 import { Content } from "models/Content"
-import { useEffect } from "react"
-import { useQuery, useQueryClient } from "react-query"
+import { useQuery } from "react-query"
 import { useParams } from "react-router-dom"
 import { getMovie } from "services/movies"
 
 
-// TODO: Dinamically load movie from route
-
 export const ContentDetailsPage = () => {
 
   const { id } = useParams();
-  const { isLoading, isError, data, error } = useQuery(['getMovie', id], () => getMovie(Number(id)));
+  const { isLoading, isError, data, error } = useQuery(['getMovie', id], async () => getMovie(Number(id)), {staleTime: 1000 * 60 * 5});
   const [ title, setTitle ] = useDocumentTitle();
 
   if(isLoading) return <Loading/>

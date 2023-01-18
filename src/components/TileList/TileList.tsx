@@ -22,7 +22,7 @@ export const TileList = (props: TileListProps) => {
     <div className="mb-12">
       { 
         title && 
-        <div className="ml-7 mb-2 text-white">
+        <div className="ml-7 mb-2 text-white text-lg font-bold">
           <h2>{title}</h2>
         </div> 
       }

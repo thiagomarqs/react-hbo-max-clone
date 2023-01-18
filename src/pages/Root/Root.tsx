@@ -21,7 +21,7 @@ const links: Link[] = [
   {label: "Devices", url: "#"},
 ];
 
-export const MasterPage = (props: PropsWithChildren) => {
+export const Root = (props: PropsWithChildren) => {
 
   return (
     <div className="w-screen bg-black h-full">

@@ -9,7 +9,7 @@ export interface ContentMainInfoProps {
   certification: any;
   releaseDate: Date;
 }
-// TODO: Find another font for the logo
+
 export const ContentMainInfo = (props: ContentMainInfoProps) => {
   const {logo, runtimeInMinutes, certification, releaseDate} = props;
   const year = releaseDate.getFullYear();
@@ -19,7 +19,7 @@ export const ContentMainInfo = (props: ContentMainInfoProps) => {
     <div>
       <div className="w-fit">
         {logo.url && <img className="w-64" src={logo.url} />}
-        {!logo.url && <h1 className="text-white text-bold text-4xl md:text-6xl">{logo.title}</h1>}
+        {!logo.url && <h1 className="text-white font-bold text-4xl md:text-6xl">{logo.title}</h1>}
       </div>
       <div className="my-2 flex content-start text-sm">
         <p className="mr-5">{runtimeString}</p>

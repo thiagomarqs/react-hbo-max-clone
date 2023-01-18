@@ -19,7 +19,7 @@ export const Section = (props: SectionProps) => {
   return (
     <div className="mb-6 mr-3 overflow-hidden">
       <div className="flex justify-between">
-        <h2 className="text-white font-bolder text-lg mb-2">{header}</h2>
+        <h2 className="text-white font-bold text-lg mb-2">{header}</h2>
         <Arrow onClick={toggleExpand} className={!isExpanded ? "rotate-180" : ""}/>
       </div>
       <div className={isExpanded ? 'h-full' : 'h-0'}>
