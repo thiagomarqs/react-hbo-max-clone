@@ -16,7 +16,7 @@ export const Header = (props: NavbarProps) => {
           <MenuIcon/>
         </div>
         <div className="w-24 h-fit my-auto mx-0 md:w-[9vw]">
-          <Link to="/"><img src="/src/assets/images/hbomaxlogo.png" alt="HBO Max logo"/></Link>
+          <Link to="/"><img src="/assets/images/hbomaxlogo.png" alt="HBO Max logo"/></Link>
         </div>
         <div className='h-fit'>
           <SearchIcon/>

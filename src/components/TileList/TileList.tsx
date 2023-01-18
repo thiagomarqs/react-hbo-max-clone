@@ -1,6 +1,5 @@
 import { NavigationArrow } from "components/NavigationArrow/NavigationArrow";
-import { useCurrentScreenWidth } from "hooks/useCurrentScreenWidth";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { v4 as uuid } from "uuid";
 import { Tile, TileProps } from "./Tile";
 
@@ -20,9 +19,6 @@ export interface TileListProps {
 export const TileList = (props: TileListProps) => {
   const listRef = useRef<HTMLDivElement>(null);
   const { list, title, highlightMessage } = props;
-  const screenWidth = useCurrentScreenWidth();
-  let canMoveLeft = false;
-  let canMoveRight = true;
 
   const moveList = (to: 'right' | 'left') => {
     if (!listRef) return;
