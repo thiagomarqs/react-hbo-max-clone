@@ -7,9 +7,10 @@
 # HBO Max Clone
 
 ## Description
-`Mobile-first` and `responsive` clone of the HBO Max web app made from scratch with React, consuming the <a href="https://www.themoviedb.org/">`TMDB API`</a>. This is an `entirely personal project`, not based on some tutorial.
+**Mobile-first** and **responsive** clone of the HBO Max web app made from scratch with React, consuming the <a href="https://www.themoviedb.org/">`TMDB API`</a>.  
+This is an entirely **personal project**, not based on some tutorial.  
 Only the "most relevant" pages will be cloned: `Homepage`, `Movie Details` and `Search`.  
-You can try the current version of the app <a href="https://react-hbo-max-clone.vercel.app">here</a>.
+You can try the current version of the app <a href="https://react-hbo-max-clone.vercel.app">`here`</a>.
 
 ## Preview
 <p align="center">
