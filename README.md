@@ -26,3 +26,11 @@ You can try the current version of the app <a href="https://react-hbo-max-clone.
 - [`React Query v3`](https://react-query-v3.tanstack.com/) - Data Caching
 - [`axios`](https://axios-http.com/) - Data Fetching
 - [`Vercel`](https://vercel.com/) - Deployment and Hosting
+
+## Features
+Pending or already implemented features
+| Feature | Status |
+| :------ | :-----: |
+| Movie Page | Implemented |
+| Home Page | Pending |
+| Search Functionality | Pending |
