@@ -39,5 +39,5 @@ Pending or already implemented features
 | Feature | Status |
 | :------ | :-----: |
 | Movie Page | Implemented |
+| Search Functionality | Implemented |
 | Home Page | Pending |
-| Search Functionality | Pending |
