@@ -4,7 +4,7 @@
   <img src="https://img.shields.io/github/commit-activity/m/thiagomarqs/react-hbo-max-clone"/>
 </p>
 
-# HBO Max Clone
+# <a href="https://react-hbo-max-clone.vercel.app">HBO Max Clone</a>
 
 ## Description
 **Mobile-first** and **responsive** clone of the HBO Max web app made from scratch with React, consuming the <a href="https://www.themoviedb.org/">`TMDB API`</a>.  
