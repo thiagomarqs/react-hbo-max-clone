@@ -30,7 +30,9 @@ export const ContentDetailsPage = () => {
 
   const list: TileProps[] = recommendations.map(r => { 
     return {
-      imageUrl: r.posterUrl,
+      title: r.title,
+      posterUrl: r.posterUrl,
+      backdropUrl: r.backdropUrl,
       size: 'default',
       contentUrl: r.contentUrl
     }}
@@ -39,7 +41,7 @@ export const ContentDetailsPage = () => {
   return (
     <div className="text-text-secondary">
       <ContentDetails content={data as Content}/>
-      <TileList title="More Like This" list={list} />
+      <TileList mode="horizontal" title="More Like This" list={list} tileSize={"default"} />
       <SectionGroup sections={generateSectionsFromContent(data as Content)} />
     </div>
   )

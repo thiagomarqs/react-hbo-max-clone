@@ -1,5 +1,4 @@
-export interface Recommendation {
-  id: number;
+export interface Movie {
   title: string;
   contentUrl: string;
   posterUrl: string;

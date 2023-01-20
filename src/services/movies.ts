@@ -6,7 +6,9 @@ import { Crew } from 'models/api/movie/credits/Crew';
 import { MovieResponse } from 'models/api/movie/MovieResponse';
 import { MovieRecommendationResponse } from 'models/api/movie/recommendation/MovieRecommendationResponse';
 import { ReleaseDate, ReleaseDateResponse, ReleaseDateResult } from 'models/api/movie/releaseDate/ReleaseDateResponse';
+import { MovieSearchResult } from 'models/api/search/MovieSearchResult';
 import { Content } from 'models/Content';
+import { Movie } from 'models/Movie';
 import { Recommendation } from 'models/Recommendation';
 import { requestConfig } from './config';
 
@@ -14,6 +16,19 @@ const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 const IMAGE_URL = import.meta.env.VITE_API_IMAGE_BASE_URL;
 const MOVIE_URL = `${BASE_URL}/movie`
 
+export const getPopular = async (): Promise<Movie[]> => {
+  const response = await axios.get<MovieSearchResult>(`${MOVIE_URL}/popular`, requestConfig);
+  const { data } = response;
+  const popularMovies: Movie[] = data.results.map(m => {
+    return {
+      title: m.original_title,
+      posterUrl: `${IMAGE_URL}/w342/${m.poster_path}`, 
+      backdropUrl: `${IMAGE_URL}/original/${m.backdrop_path}`,
+      contentUrl: `/movie/${m.id}`
+    }
+  });
+  return popularMovies;
+}
 
 export const getMovie = async (id: number): Promise<Content> => {
   const moviePromise = axios.get<MovieResponse>(`${MOVIE_URL}/${id}`, requestConfig);
@@ -36,7 +51,7 @@ export const getMovie = async (id: number): Promise<Content> => {
     certification: certification as string,
     recommendations: recommendations as Recommendation[],
     backdrop_url: `${IMAGE_URL}/original/${data.backdrop_path}`,
-    poster_url: `${IMAGE_URL}/original/${data.poster_path}`
+    poster_url: `${IMAGE_URL}/w342/${data.poster_path}`
   };
   return movie;
 }
@@ -63,8 +78,10 @@ export const getRecommendations = async(id: number): Promise<Recommendation[]> =
   const recommendations: Recommendation[] = data.results.map(r => {
     return {
       id: r.id,
+      title: r.original_title,
       contentUrl: `/movie/${r.id}`,
-      posterUrl: `${IMAGE_URL}/original/${r.poster_path}`
+      posterUrl: r.poster_path ? `${IMAGE_URL}/w342/${r.poster_path}` : '',
+      backdropUrl: r.backdrop_path ? `${IMAGE_URL}/w780/${r.backdrop_path}` : ''
     }
   })
 

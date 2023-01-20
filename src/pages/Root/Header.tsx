@@ -19,7 +19,7 @@ export const Header = (props: NavbarProps) => {
           <Link to="/"><img src="/assets/images/hbomaxlogo.png" alt="HBO Max logo"/></Link>
         </div>
         <div className='h-fit'>
-          <SearchIcon/>
+          <Link to="search"><SearchIcon/></Link>
         </div>
       </div>
     </div>
