@@ -14,6 +14,7 @@ export const ContentDetails = (props: ContentDetailsProps) => {
   const { 
     poster_url,
     backdrop_url,
+    logo_url,
     runtime,
     release_date,
     overview,
@@ -43,7 +44,7 @@ export const ContentDetails = (props: ContentDetailsProps) => {
       <div className="relative h-max pl-7 w-11/12 pt-[67vh] sm:pt-[40vh] lg:pt-[70vh] md:pl-14">
 
         <ContentMainInfo
-          logo={{title: original_title}}
+          logo={{title: original_title, url: logo_url || undefined}}
           runtimeInMinutes={runtime}
           certification={certification}
           releaseDate={new Date(release_date)} />

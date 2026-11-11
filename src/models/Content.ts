@@ -13,6 +13,7 @@ export interface Content {
   runtime: number;
   backdrop_url: string;
   poster_url: string;
+  logo_url: string;
   certification: string;
   castCrew: Cast[];
   producers: Crew[];
