@@ -3,6 +3,7 @@ import { Cast } from 'models/api/movie/credits/Cast';
 import { Credits } from 'models/api/movie/credits/Credits';
 import { CreditsResponse } from 'models/api/movie/credits/CreditsResponse';
 import { Crew } from 'models/api/movie/credits/Crew';
+import { ImagesResponse, Logo } from 'models/api/movie/images/ImagesResponse';
 import { MovieResponse } from 'models/api/movie/MovieResponse';
 import { MovieRecommendationResponse } from 'models/api/movie/recommendation/MovieRecommendationResponse';
 import { ReleaseDate, ReleaseDateResponse, ReleaseDateResult } from 'models/api/movie/releaseDate/ReleaseDateResponse';
@@ -35,13 +36,15 @@ export const getMovie = async (id: number): Promise<Content> => {
   const creditsPromise = getCredits(id);
   const recommendationsPromise = getRecommendations(id);
   const certificationPromise = getCertification(id, "BR");
+  const logoPromise = getMovieLogo(id);
   const promises = [
     moviePromise, 
     creditsPromise, 
-    recommendationsPromise,
-    certificationPromise
+    recommendationsPromise, 
+    certificationPromise,
+    logoPromise
   ];
-  const [ movieResponse, credits, recommendations, certification ] = await Promise.all(promises);
+  const [ movieResponse, credits, recommendations, certification, logoUrl ] = await Promise.all(promises);
 
   const { data } = movieResponse as AxiosResponse<MovieResponse>;
 
@@ -51,9 +54,25 @@ export const getMovie = async (id: number): Promise<Content> => {
     certification: certification as string,
     recommendations: recommendations as Recommendation[],
     backdrop_url: `${IMAGE_URL}/original/${data.backdrop_path}`,
-    poster_url: `${IMAGE_URL}/w342/${data.poster_path}`
+    poster_url: `${IMAGE_URL}/w342/${data.poster_path}`,
+    logo_url: logoUrl as string
   };
   return movie;
+}
+
+export const getMovieLogo = async(id: number): Promise<string> => {
+  const response = await axios.get<ImagesResponse>(`${MOVIE_URL}/${id}/images`, requestConfig);
+  const { data } = response;
+  const logos: Logo[] = data.logos ?? [];
+
+  // Prefer the English logo, then a language-neutral one, then any available logo
+  const logo = logos.find(l => l.iso_639_1 === 'en')
+    ?? logos.find(l => l.iso_639_1 === null)
+    ?? logos[0];
+
+  if(!logo) return "";
+
+  return `${IMAGE_URL}/w500/${logo.file_path}`;
 }
 
 export const getCredits = async(id: number): Promise<Credits> => {

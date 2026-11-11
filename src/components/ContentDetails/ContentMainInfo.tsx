@@ -17,9 +17,10 @@ export const ContentMainInfo = (props: ContentMainInfoProps) => {
 
   return (
     <div>
-      <div className="w-fit">
-        {logo.url && <img className="w-64" src={logo.url} />}
-        {!logo.url && <h1 className="text-white font-bold text-4xl md:text-6xl">{logo.title}</h1>}
+      <div className="w-fit max-w-full">
+        {logo.url
+          ? <img className="h-auto w-56 max-w-[80vw] object-contain object-left drop-shadow-[0_4px_10px_rgba(0,0,0,0.6)] md:w-80" src={logo.url} alt={logo.title} />
+          : <h1 className="text-white font-bold text-4xl md:text-6xl">{logo.title}</h1>}
       </div>
       <div className="my-2 flex content-start text-sm">
         <p className="mr-5">{runtimeString}</p>
